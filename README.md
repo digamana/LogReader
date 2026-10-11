@@ -5,6 +5,14 @@
 
 ---
 
+## ⚠️ Windows SmartScreen 警告 / SmartScreen Warning
+
+**中文：** 由於本程式尚未購買程式碼簽署憑證，Windows 可能顯示「無法辨識的應用程式」警告。程式本身安全無虞，原始碼已完整公開。略過方式：點擊「**更多資訊**」→「**仍要執行**」。
+
+**English:** This application has not been code-signed with a trusted certificate. Windows SmartScreen may show an "unrecognized app" warning. The application is safe to run and the full source code is publicly available here. To bypass: click **"More info"** → **"Run anyway"**.
+
+---
+
 ## 中文說明
 
 ### 簡介
