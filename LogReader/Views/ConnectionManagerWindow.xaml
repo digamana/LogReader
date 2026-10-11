@@ -1,0 +1,108 @@
+<Window x:Class="LogReader.Views.ConnectionManagerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="遠端連線管理" Height="600" Width="860"
+        WindowStartupLocation="CenterOwner">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="320"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Left: List + Buttons -->
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <ListBox x:Name="ConnectionListBox" Grid.Row="0"
+                     SelectionChanged="ConnectionListBox_SelectionChanged"
+                     Margin="0,0,0,6"/>
+            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                <Button Content="新增" Width="60" Height="28" Margin="0,0,6,0" Click="AddButton_Click"/>
+                <Button Content="複製" Width="60" Height="28" Margin="0,0,6,0" Click="CopyButton_Click"/>
+                <Button Content="刪除" Width="60" Height="28" Click="DeleteButton_Click"/>
+            </StackPanel>
+        </Grid>
+
+        <GridSplitter Grid.Column="1" Width="4" HorizontalAlignment="Stretch" Background="#DDD"/>
+
+        <!-- Right: Edit Form -->
+        <ScrollViewer Grid.Column="2">
+            <StackPanel Margin="8,0,0,0">
+
+                <!-- Edit Fields -->
+                <StackPanel x:Name="EditPanel" IsEnabled="False">
+                    <TextBlock Text="顯示名稱" Margin="0,0,0,3" FontWeight="SemiBold"/>
+                    <TextBox x:Name="NameBox" Height="28" Padding="4,3" Margin="0,0,0,10"
+                             TextChanged="FieldChanged"/>
+
+                    <TextBlock Text="環境類型 (Test / Prod / Stage / PreProd)" Margin="0,0,0,3" FontWeight="SemiBold"/>
+                    <TextBox x:Name="TypeBox" Height="28" Padding="4,3" Margin="0,0,0,10"
+                             TextChanged="FieldChanged"/>
+
+                    <TextBlock Text="專案名稱" Margin="0,0,0,3" FontWeight="SemiBold"/>
+                    <TextBox x:Name="ProjNameBox" Height="28" Padding="4,3" Margin="0,0,0,10"
+                             TextChanged="FieldChanged"/>
+
+                    <TextBlock Text="備註" Margin="0,0,0,3" FontWeight="SemiBold"/>
+                    <TextBox x:Name="MemoBox" Height="28" Padding="4,3" Margin="0,0,0,10"
+                             TextChanged="FieldChanged"/>
+
+                    <TextBlock Text="主機 IP / 網域" Margin="0,0,0,3" FontWeight="SemiBold"/>
+                    <TextBox x:Name="HostBox" Height="28" Padding="4,3" Margin="0,0,0,10"
+                             TextChanged="FieldChanged"/>
+
+                    <TextBlock Text="SSH Port (預設 22)" Margin="0,0,0,3" FontWeight="SemiBold"/>
+                    <TextBox x:Name="SshPortBox" Height="28" Padding="4,3" Margin="0,0,0,10"
+                             TextChanged="FieldChanged"/>
+
+                    <TextBlock Text="帳號" Margin="0,0,0,3" FontWeight="SemiBold"/>
+                    <TextBox x:Name="UsernameBox" Height="28" Padding="4,3" Margin="0,0,0,10"
+                             TextChanged="FieldChanged"/>
+
+                    <TextBlock Text="密碼" Margin="0,0,0,3" FontWeight="SemiBold"/>
+                    <PasswordBox x:Name="PasswordBox" Height="28" Padding="4,3" Margin="0,0,0,10"
+                                 PasswordChanged="PasswordBox_PasswordChanged"/>
+
+                    <TextBlock Text="遠端 Log 路徑" Margin="0,0,0,3" FontWeight="SemiBold"/>
+                    <TextBox x:Name="RemotePathBox" Height="28" Padding="4,3" Margin="0,0,0,14"
+                             TextChanged="FieldChanged"/>
+
+                    <Button Content="儲存" Height="32" Background="#0078D7" Foreground="White"
+                            FontWeight="SemiBold" Click="SaveButton_Click"/>
+                </StackPanel>
+
+                <!-- Separator -->
+                <Separator Margin="0,16,0,12"/>
+
+                <!-- Connections.json 說明區 -->
+                <Border Background="#F0F4FF" BorderBrush="#C0CEFF" BorderThickness="1"
+                        CornerRadius="4" Padding="10,8" Margin="0,0,0,8">
+                    <StackPanel>
+                        <TextBlock FontWeight="SemiBold" Margin="0,0,0,6" Foreground="#1A3A8F">
+                            📄 關於 Connections.json
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="11.5" Foreground="#333" LineHeight="18">
+                            連線設定預設已內嵌於 EXE 中，無需外部檔案即可使用。
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="11.5" Foreground="#333" Margin="0,4,0,0" LineHeight="18">
+                            若 EXE 同目錄下存在 <Run FontWeight="SemiBold">Connections.json</Run>，
+                            程式將優先讀取此檔案，可用於在不重新編譯的情況下覆蓋內建連線設定。
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" FontSize="11.5" Foreground="#555" Margin="0,4,0,0" LineHeight="18">
+                            點擊下方按鈕可將目前連線設定匯出為 Connections.json，
+                            之後儲存操作將自動同步至此檔案。
+                        </TextBlock>
+                        <TextBlock x:Name="FileStatusText" FontSize="11" Margin="0,6,0,0"/>
+                    </StackPanel>
+                </Border>
+
+                <Button x:Name="ExportButton" Height="32"
+                        Background="#107C10" Foreground="White" FontWeight="SemiBold"
+                        Click="ExportButton_Click"/>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>

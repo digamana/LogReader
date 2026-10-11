@@ -1,0 +1,23 @@
+<Window x:Class="LogReader.Views.AddFavoriteDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="加入最愛" Height="140" Width="360"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+    <Grid Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="請輸入最愛名稱：" Margin="0,0,0,6"/>
+        <TextBox x:Name="NameTextBox" Grid.Row="1" Height="28" Padding="4,3"
+                 Text="" Margin="0,0,0,10"/>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="確定" Width="70" Height="28" Margin="0,0,8,0"
+                    Click="OkButton_Click" IsDefault="True"/>
+            <Button Content="取消" Width="70" Height="28"
+                    Click="CancelButton_Click" IsCancel="True"/>
+        </StackPanel>
+    </Grid>
+</Window>
